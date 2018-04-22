@@ -1,0 +1,18 @@
+Download Kernel 
+
+# git clone https://github.com/beagleboard/linux.git
+# cd linux/
+# git remote -v
+
+Install libraries and tools to build
+
+# sudo apt-get install ia32-libs
+# sudo apt-get install lib32z1 lib32ncurses5 lib32bz2-1.0
+# sudo apt-get install ia32-libs
+# sudo apt-get install lzop
+
+Compile the kernel
+# sudo make ARCH=arm CROSS_COMPILE=arm-linux-gnueabihf- bb.org_defconfig
+# sudo make ARCH=arm CROSS_COMPILE=arm-linux-gnueabihf- uImage dtbs LOADADDR=0x80008000 -j4
+# sudo make ARCH=arm CROSS_COMPILE=/opt/gcc-arm-linux/bin/arm-linux-gnueabihf- -j4 modules
+# sudo make ARCH=arm CROSS_COMPILE=arm-linux-gnueabihf- INSTALL_MOD_PATH=/path_to_RFS_in_SD_card modules_install
