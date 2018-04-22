@@ -1,0 +1,21 @@
+Compile uboot 
+-------------
+
+# git clone git://git.denx.de/u-boot.git u-boot/
+# cd u-boot
+
+# make ARCH=arm CROSS_COMPILE=arm-linux-gnueabihf- am335x_boneblack_defconfig
+# make ARCH=arm CROSS_COMPILE=arm-linux-gnueabihf-
+
+---------------------------------------------------------------
+
+U-Boot offers a sandbox feature ,  can be tested on the build-host. 
+Playing with U-Boot's sandbox is relatively simple on a system where common 
+development tools are installed.
+
+# git clone git://git.denx.de/u-boot; cd u-boot
+# make ARCH=sandbox defconfig
+# make
+#./u-boot
+=> printenv
+=> help
