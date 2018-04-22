@@ -1,0 +1,51 @@
+
+
+1)Create partition on SD card
+
+# fdisk /dev/sdcard
+x for expert mode
+h to set heads to 255
+s to set sectors to 63
+c to set cylinders to value above
+r to return to normal mode
+n for new partition: primary, number 1, default first sector, +16M size
+t to set type of partition with code: c (W95 FAT32 LBA)
+a to mark bootable partition number 1
+n for new partition: primary, number 2, default first sector, default full size
+w to write the partition table
+
+Format the boot and root partitions of the image
+$ sudo mkfs.vfat -F 16 -n "boot" /dev/sdcard0
+$ sudo mkfs.ext3 -L "rootfs" /dev/sdcard1
+
+OR
+Use gparted
+# sudo apt-get install gparted
+
+Size, 100 MB , file system FAT32 boot partion.
+Size, 1000MB, file system EXT3 RFS
+
+2) Copy images to SD card
+# cp /beaglebone/u-boot/u-boot.img /sdcard/boot/
+# cp /beaglebone/u-boot/MLO /sdcard/boot/
+
+# cp beaglebone/linux/arch/arm/boot/UImage /sdcard/boot/
+# cp beaglebone/linux/arch/arm/boot/am335x-boneblack.dtb /sdcard/boot/
+
+3) create a file named as “uEnv.txt” in BOOT partition and copy the following code to it.
+
+console=ttyS0,115200n8
+netargs=setenv bootargs console=ttyO0,115200n8 root=/dev/mmcblk0p2 rw rootfstype=ext4 rootwait debug earlyprintk mem=512M
+netboot=echo Booting from microSD ...; setenv autoload no ; load mmc 0:1 ${loadaddr} uImage ; load mmc 0:1 ${fdtaddr} am335x-boneblack.dtb ; run netargs ; bootm ${loadaddr} - ${fdtaddr}
+uenvcmd=run netboot
+# cp ./uEnv.txt /sdcard/boot/
+
+4) Copy RFS file,
+# sudo mv ./* /media/sdcard/rootfs/
+
+
+
+
+find tty device and open with picocom
+
+# sudo picocom /dev/ttyUSB0 -b 115200
