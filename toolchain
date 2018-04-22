@@ -1,0 +1,25 @@
+Installing ARM cross compiler toolchain to build linux kernel
+
+Download tool chain ,
+http://releases.linaro.org/components/toolchain/binaries/
+
+Linaro is free and open-source software such as the Linux kernel, the GNU Compiler Collection (GCC), power management, 
+graphics and multimedia interfaces for the ARM family of instruction sets and implementations thereof as well as for the 
+Heterogeneous System Architecture. 
+
+# sudo tar xvf gcc-linaro-5.4.1-2017.05-x86_64_arm-linux-gnueabihf.tar.xz -C /opt/
+# cd /opt/
+# sudo mv gcc-linaro-arm-linux-gnueabihf-4.8-2014.04_linux/ gcc-arm-linux
+# export PATH=$PATH:/opt/gcc-arm-linux/bin
+
+Check
+
+# locate arm-linux-gnueabihf-gcc
+/opt/gcc-arm-linux/bin/arm-linux-gnueabihf-gcc
+/opt/gcc-arm-linux/bin/arm-linux-gnueabihf-gcc-5.4.1
+/opt/gcc-arm-linux/bin/arm-linux-gnueabihf-gcc-ar
+/opt/gcc-arm-linux/bin/arm-linux-gnueabihf-gcc-nm
+/opt/gcc-arm-linux/bin/arm-linux-gnueabihf-gcc-ranlib
+/opt/gcc-arm-linux/share/man/man1/arm-linux-gnueabihf-gcc.1
+
+# arm-linux-gnueabihf-gcc --version
